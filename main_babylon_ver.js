@@ -85,7 +85,7 @@ function init() {
     videoDome.setDirection(new BABYLON.Vector3(0, 0, 0));
 
     if (startedA1) {
-      videoDome.setDirection(new BABYLON.Vector3(0, 0, -1));
+      videoDome.setDirection(new BABYLON.Vector3(-1, 0, 0));
     }
 
     let videoTexture_segway_left = new BABYLON.VideoTexture("video_segway_left", video, scene, true, true);
