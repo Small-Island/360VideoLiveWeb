@@ -84,6 +84,10 @@ function init() {
     videoDome.setAbsolutePosition(new BABYLON.Vector3(0, 0, 0));
     videoDome.setDirection(new BABYLON.Vector3(0, 0, 0));
 
+    if (startedA1) {
+      videoDome.setDirection(new BABYLON.Vector3(0, 0, -1));
+    }
+
     let videoTexture_segway_left = new BABYLON.VideoTexture("video_segway_left", video, scene, true, true);
     let videoTexture_segway_right = new BABYLON.VideoTexture("video_segway_right", video2, scene, true, true);
 
@@ -207,11 +211,13 @@ async function connectToSora() {
   const startButtonA1 = document.getElementById("startButtonA1");
 
   recvonlySegwayLeft.on("track", (event) => {
-    console.log("Received Video.");
-    document.getElementById("noVideoMessage").style.display = "none";
-    remoteStreamSegwayLeft = event.streams[0];
-    if (!startedSegway && !startedA1) {
-      startButtonSegway.style.display = "block"; // 映像が配信されたらボタンを表示する
+    if (event.track.kind == "video") {
+      console.log("Received Video.");
+      document.getElementById("noVideoMessage").style.display = "none";
+      remoteStreamSegwayLeft = event.streams[0];
+      if (!startedSegway && !startedA1) {
+        startButtonSegway.style.display = "block"; // 映像が配信されたらボタンを表示する
+      }
     }
   });
 
